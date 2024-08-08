@@ -1,4 +1,4 @@
 package com.xzajkos.bank.Dto;
 
-public record UserDto(long id, String firstName, String lastName, String username, String password) {
+public record UserDto(long id, String firstName, String lastName, String username) {
 }
