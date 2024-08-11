@@ -8,7 +8,7 @@ import com.xzajkos.bank.Model.User;
 public interface UserService {
     AuthenticationResponse login(String username, String password);
     AuthenticationResponse register(User user);
-    UserDto getUser(String username);
-    OperationResponse deleteUser(String username);
+    UserDto getUser(long id);
+    OperationResponse deleteUser(long id);
     OperationResponse changePassword(String username, String oldPassword, String newPassword);
 }
