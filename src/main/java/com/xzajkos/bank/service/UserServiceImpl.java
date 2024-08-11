@@ -57,19 +57,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDto getUser(String username) {
-        return userDtoMapper.apply(userRepository.findByUsername(username));
+    public UserDto getUser(long id) {
+        return userDtoMapper.apply(userRepository.findById(id).orElseThrow());
     }
 
     @Override
-    public OperationResponse deleteUser(String username) {
-        if (userRepository.findByUsername(username) == null) {
-            return new OperationResponse("DELETE_USER", "FAILED", new Date());
-        }
-        else{
-            userRepository.delete(userRepository.findByUsername(username));
-            return new OperationResponse("DELETE_USER", "SUCCESS", new Date());
-        }
+    public OperationResponse deleteUser(long id) {
+        userRepository.delete(userRepository.findById(id).orElseThrow());
+        return new OperationResponse("DELETE_USER", "SUCCESS", new Date());
     }
 
     @Override
