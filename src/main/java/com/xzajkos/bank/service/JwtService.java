@@ -2,6 +2,7 @@ package com.xzajkos.bank.Service;
 
 import com.xzajkos.bank.Dto.UserDto;
 import com.xzajkos.bank.Model.AuthenticationResponse;
+import com.xzajkos.bank.Model.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
@@ -22,13 +23,13 @@ public class JwtService {
         return Keys.hmacShaKeyFor(keyBytes);
     }
 
-    private String generateToken(UserDto userDto) {
+    private String generateToken(User user) {
         return Jwts
                 .builder()
                 .signWith(signingKey())
                 .issuedAt(new Date())
                 .expiration(new Date(System.currentTimeMillis() + 1000 * 60 *60 * 24))
-                .subject(userDto.username())
+                .subject(user.getUsername())
                 .compact();
     }
 
@@ -50,9 +51,9 @@ public class JwtService {
         return extractClaim(token, Claims::getExpiration).before(new Date());
     }
 
-    public boolean validateToken(String token, UserDto userDto){
+    public boolean validateToken(String token, User user){
         String username = extractClaim(token, Claims::getSubject);
-        return userDto.username().equals(username);
+        return user.getUsername().equals(username);
     }
 
     public String extractUsername(String token){
