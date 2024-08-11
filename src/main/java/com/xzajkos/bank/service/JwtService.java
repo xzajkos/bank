@@ -23,7 +23,7 @@ public class JwtService {
         return Keys.hmacShaKeyFor(keyBytes);
     }
 
-    private String generateToken(User user) {
+    public String generateToken(User user) {
         return Jwts
                 .builder()
                 .signWith(signingKey())
