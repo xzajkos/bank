@@ -2,14 +2,13 @@ package com.xzajkos.bank.Service;
 
 import com.xzajkos.bank.Dto.UserDto;
 import com.xzajkos.bank.Model.AuthenticationResponse;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Service;
+import com.xzajkos.bank.Model.OperationResponse;
+import com.xzajkos.bank.Model.User;
 
 public interface UserService {
-    ResponseEntity <AuthenticationResponse> login(String username, String password);
-    ResponseEntity<AuthenticationResponse> register(UserDto userDto);
-    ResponseEntity<UserDto> getUser(String username);
-    ResponseEntity<UserDto> updateUser(String username, UserDto userDto);
-    ResponseEntity<UserDto> deleteUser(String username);
-    ResponseEntity<UserDto> changePassword(String username, String oldPassword, String newPassword);
+    AuthenticationResponse login(String username, String password);
+    AuthenticationResponse register(User user);
+    UserDto getUser(String username);
+    OperationResponse deleteUser(String username);
+    OperationResponse changePassword(String username, String oldPassword, String newPassword);
 }
