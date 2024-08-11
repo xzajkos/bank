@@ -10,12 +10,15 @@ import java.math.BigDecimal;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Entity
 public abstract class Account {
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
     private String accountNumber;
     private BigDecimal balance;
     private BigDecimal withdrawalLimit;
     @ManyToOne
-    @JoinTable(name = "userId")
+    @JoinColumn(name = "userId")
     private User user;
 }
